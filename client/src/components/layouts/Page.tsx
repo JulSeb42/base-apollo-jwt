@@ -1,13 +1,13 @@
-/*=============================================== PageLayout ===============================================*/
+/*=============================================== Page ===============================================*/
 
 import React from "react"
 import { Helmet, Wrapper, Main } from "tsx-library-julseb"
 
 import Header from "./Header"
 
-import siteData from "../data/site-data"
+import siteData from "../../data/site-data"
 
-const PageLayout = ({
+const Page = ({
     title,
     description,
     keywords,
@@ -43,7 +43,7 @@ const PageLayout = ({
     )
 }
 
-export default PageLayout
+export default Page
 
 interface Props {
     title: string

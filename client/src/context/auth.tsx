@@ -124,7 +124,7 @@ export type AuthContextType = {
     setUser: (user: null | UserType) => void
     // setUser: any
     loginUser: (user: UserType) => void
-    logoutUser: (e: React.MouseEvent<HTMLButtonElement>) => void
+    logoutUser: () => void
     setToken: (token: string) => void
     error?: GraphQLErrors
 }

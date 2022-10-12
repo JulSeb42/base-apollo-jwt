@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
 import { PageLoading, Text } from "tsx-library-julseb"
 
-import PageLayout from "../../components/PageLayout"
+import Page from "../../components/layouts/Page"
 
 import { GET_USER } from "../../graphql/queries"
 
@@ -25,9 +25,9 @@ const PublicProfile = () => {
     return loading ? (
         <PageLoading />
     ) : (
-        <PageLayout title={error ? "An error occured" : user.fullName}>
+        <Page title={error ? "An error occured" : user.fullName}>
             <Text tag="h1">{user.fullName}</Text>
-        </PageLayout>
+        </Page>
     )
 }
 

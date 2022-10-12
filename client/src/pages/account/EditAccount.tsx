@@ -8,14 +8,15 @@ import { useNavigate } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
-import PageLayout from "../../components/PageLayout"
+import Page from "../../components/layouts/Page"
+import DangerZone from "../../components/DangerZone"
 
-import { EDIT_USER } from "../../graphql/mutations"
+import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
 import { EditPagesTypes } from "../../types"
 
 const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
     const navigate = useNavigate()
-    const { user, setUser, setToken } = useContext(
+    const { user, setUser, setToken, logoutUser } = useContext(
         AuthContext
     ) as AuthContextType
     const { uuid } = Utils
@@ -55,8 +56,25 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
         })
     }
 
+    const [deleteUser, { loading: deleteLoading }] = useMutation(DELETE_USER)
+
+    const handleDelete = () => {
+        deleteUser({
+            variables: {
+                id: user?._id,
+            },
+
+            onError: ({ graphQLErrors }) => {
+                console.log(graphQLErrors[0])
+            },
+        }).then(() => {
+            logoutUser()
+            navigate("/login")
+        })
+    }
+
     return (
-        <PageLayout title="Edit your account" mainWidth="form">
+        <Page title="Edit your account" mainWidth="form">
             <Text tag="h1">Edit your account</Text>
 
             <Form
@@ -91,7 +109,20 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                         {message}
                     </Alert>
                 ))}
-        </PageLayout>
+
+            <DangerZone
+                texts={{
+                    buttonOpen: "Delete account",
+                    body: "Are you sure you want to delete your account?",
+                    buttonSecondary: "No, cancel",
+                }}
+                buttonPrimary={{
+                    text: "Yes, delete my account",
+                    onClick: handleDelete,
+                    isLoading: deleteLoading,
+                }}
+            />
+        </Page>
     )
 }
 

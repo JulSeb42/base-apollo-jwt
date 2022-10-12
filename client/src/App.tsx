@@ -37,10 +37,16 @@ const App = () => {
                                 </ProtectedRoutes>
                             ) : route.anon ? (
                                 <AnonRoutes>
-                                    <route.element />
+                                    <route.element
+                                        edited={route.edit && edited}
+                                        setEdited={route.edit && setEdited}
+                                    />
                                 </AnonRoutes>
                             ) : (
-                                <route.element />
+                                <route.element
+                                    edited={route.edit && edited}
+                                    setEdited={route.edit && setEdited}
+                                />
                             )
                         }
                         key={Utils.uuid()}

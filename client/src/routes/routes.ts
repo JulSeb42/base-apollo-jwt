@@ -5,15 +5,14 @@ import { FC } from "react"
 import Homepage from "../pages/Homepage"
 import NotFound from "../pages/NotFound"
 
-import Signup from "../pages/auth/Signup"
-import Login from "../pages/auth/Login"
-
-import MyAccount from "../pages/user/MyAccount"
-import EditAccount from "../pages/user/EditAccount"
-
 import AllUsers from "../pages/user/AllUsers"
 import PublicProfile from "../pages/user/PublicProfile"
 
+import Signup from "../pages/auth/Signup"
+import Login from "../pages/auth/Login"
+
+import MyAccount from "../pages/account/MyAccount"
+import EditAccount from "../pages/account/EditAccount"
 
 type RouteType = {
     path: string
@@ -31,6 +30,15 @@ const routes: RouteType[] = [
     {
         path: "*",
         element: NotFound,
+    },
+
+    {
+        path: "/users",
+        element: AllUsers,
+    },
+    {
+        path: "/users/:id",
+        element: PublicProfile,
     },
 
     {
@@ -54,15 +62,6 @@ const routes: RouteType[] = [
         element: EditAccount,
         protected: true,
         edit: true,
-    },
-
-    {
-        path: "/users",
-        element: AllUsers,
-    },
-    {
-        path: "/users/:id",
-        element: PublicProfile,
     },
 ]
 

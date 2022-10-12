@@ -8,7 +8,7 @@ import { GraphQLErrors } from "@apollo/client/errors"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
-import PageLayout from "../../components/PageLayout"
+import Page from "../../components/layouts/Page"
 
 import { SIGNUP } from "../../graphql/mutations"
 
@@ -54,7 +54,7 @@ const Signup = () => {
     }
 
     return (
-        <PageLayout title="Create an account" mainWidth="form">
+        <Page title="Create an account" mainWidth="form">
             <Text tag="h1">Create an account</Text>
 
             <Form
@@ -96,7 +96,7 @@ const Signup = () => {
             <Text>
                 You already have an account? <Link to="/login">Log in</Link>.
             </Text>
-        </PageLayout>
+        </Page>
     )
 }
 

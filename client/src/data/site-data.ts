@@ -1,7 +1,7 @@
 /*=============================================== Site data ===============================================*/
 
 const siteData = {
-    name: "Base React",
+    name: "Apollo React app",
     favicon: "",
     email: "",
     author: "",

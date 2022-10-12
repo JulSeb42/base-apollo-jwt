@@ -27,6 +27,10 @@ const usersResolvers = {
             return user
         },
         deleteUser: async (_, { id }) => {
+            if (!id) {
+                throw new ApolloError("ID is missing", "ID_MISSING")
+            }
+            
             await User.findByIdAndDelete(id)
             return `User ${id} was deleted successfully`
         },

@@ -10,11 +10,11 @@ import {
 } from "tsx-library-julseb"
 import { NavLink } from "react-router-dom"
 
-import { AuthContext, AuthContextType } from "../context/auth"
+import { AuthContext, AuthContextType } from "../../context/auth"
 
-import siteData from "../data/site-data"
+import siteData from "../../data/site-data"
 
-import { NavItemType } from "../types"
+import { NavItemType } from "../../types"
 
 const Header = () => {
     const { uuid } = Utils
@@ -38,7 +38,7 @@ const Header = () => {
         },
     ]
 
-    const loggedInLinks: NavItemType[] = [
+    const protectedLinks: NavItemType[] = [
         {
             text: "My account",
             to: "/my-account",
@@ -77,7 +77,7 @@ const Header = () => {
         <Container logo={{ text: siteData.name }}>
             {navLinks(baseLinks)}
 
-            {isLoggedIn ? navLinks(loggedInLinks) : navLinks(anonLinks)}
+            {isLoggedIn ? navLinks(protectedLinks) : navLinks(anonLinks)}
 
             <ButtonIcon
                 icon={selectedTheme === "dark" ? "sun" : "moon"}

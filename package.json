@@ -7,6 +7,7 @@
         "apollo-server": "^3.10.2",
         "apollo-server-errors": "^3.3.1",
         "bcryptjs": "^2.4.3",
+        "concurrently": "^7.4.0",
         "dotenv": "^16.0.3",
         "graphql": "^16.6.0",
         "jsonwebtoken": "^8.5.1",
@@ -14,6 +15,8 @@
         "ts-utils-julseb": "^2.2.0"
     },
     "scripts": {
-        "dev": "nodemon index.js"
+        "dev": "nodemon index.js",
+        "client": "cd client && yarn start",
+        "start": "concurrently --kill-others 'yarn dev' 'yarn client'"
     }
 }

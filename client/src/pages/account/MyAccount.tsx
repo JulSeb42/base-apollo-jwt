@@ -6,8 +6,8 @@ import { Link } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
-import PageLayout from "../../components/PageLayout"
-import ErrorPage from "../../components/ErrorPage"
+import Page from "../../components/layouts/Page"
+import ErrorPage from "../../components/layouts/ErrorPage"
 
 const MyAccount = () => {
     const { user, isLoading, error } = useContext(
@@ -18,13 +18,13 @@ const MyAccount = () => {
     if (error) return <ErrorPage error={error[0].message} />
 
     return user ? (
-        <PageLayout title={user.fullName}>
+        <Page title={user.fullName}>
             <Text tag="h1">Hello {user.fullName}</Text>
 
             <Text>
                 <Link to="/my-account/edit">Edit your account.</Link>
             </Text>
-        </PageLayout>
+        </Page>
     ) : (
         <Text>An error occured</Text>
     )

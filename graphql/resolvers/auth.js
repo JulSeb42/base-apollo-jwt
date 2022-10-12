@@ -58,6 +58,13 @@ const usersResolvers = {
 
             const user = await User.findOne({ email })
 
+            if (!user) {
+                throw new ApolloError(
+                    "This user does not exist.",
+                    "USER_NON_EXISTENT"
+                )
+            }
+
             if (user && (await bcrypt.compare(password, user.password))) {
                 const token = jwt.sign(
                     user._doc,

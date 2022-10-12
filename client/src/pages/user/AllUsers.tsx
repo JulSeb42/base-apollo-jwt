@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client"
 import { Text, PageLoading, Utils } from "tsx-library-julseb"
 import { Link } from "react-router-dom"
 
-import PageLayout from "../../components/PageLayout"
+import Page from "../../components/layouts/Page"
 
 import { ALL_USERS } from "../../graphql/queries"
 
@@ -18,7 +18,7 @@ const AllUsers = () => {
     return loading ? (
         <PageLoading />
     ) : (
-        <PageLayout title="All users">
+        <Page title="All users">
             <Text tag="h1">All users</Text>
 
             {data ? (
@@ -34,7 +34,7 @@ const AllUsers = () => {
             ) : (
                 <Text>{error?.message}</Text>
             )}
-        </PageLayout>
+        </Page>
     )
 }
 
