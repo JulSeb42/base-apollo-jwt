@@ -6,11 +6,12 @@ const LOGIN = gql`
     mutation login($loginInput: LoginInput) {
         login(loginInput: $loginInput) {
             _id
-            fullName
             email
+            fullName
             password
-            token
             verified
+            verifyToken
+            token
         }
     }
 `

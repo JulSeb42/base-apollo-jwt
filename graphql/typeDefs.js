@@ -11,7 +11,7 @@ const typeDefs = gql`
         fullName: String!
         email: String!
         password: String!
-        token: String!
+        token: String
     }
 
     input VerifyInput {

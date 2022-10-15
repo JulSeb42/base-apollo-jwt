@@ -37,6 +37,8 @@ const Signup = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        console.log(inputs)
+
         signup({
             variables: {
                 signupInput: inputs,

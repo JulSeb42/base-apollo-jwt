@@ -58,6 +58,7 @@ const routes: RouteType[] = [
     {
         path: "/verify/:token/:id",
         element: Verify,
+        edit: true,
     },
     {
         path: "/login",

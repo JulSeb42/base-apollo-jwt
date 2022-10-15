@@ -20,7 +20,7 @@ const Login = () => {
     const [login, { loading }] = useMutation(LOGIN)
 
     const [inputs, setInputs] = useState({
-        email: "a@b.com",
+        email: "julien.sebag@me.com",
         password: "Password42",
     })
     const [errorMessages, setErrorMessages] = useState<

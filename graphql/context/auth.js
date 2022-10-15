@@ -68,8 +68,6 @@ const authContext = {
         })
 
         return res
-
-        // return res._doc
     },
 
     login: async ({ email, password }) => {

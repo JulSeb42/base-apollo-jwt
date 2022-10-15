@@ -6,9 +6,11 @@ const SIGNUP = gql`
     mutation signup($signupInput: SignupInput) {
         signup(signupInput: $signupInput) {
             _id
-            fullName
             email
+            fullName
             password
+            verified
+            verifyToken
             token
         }
     }

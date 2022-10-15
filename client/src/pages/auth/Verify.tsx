@@ -12,10 +12,11 @@ import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
 import { VERIFY_USER } from "../../graphql/mutations"
+import { EditPagesTypes } from "../../types"
 
-const Verify = () => {
+const Verify = ({ edited, setEdited }: EditPagesTypes) => {
     const { id, token } = useParams()
-    const { isLoggedIn, user } = useContext(AuthContext) as AuthContextType
+    const { isLoggedIn, user, setUser, setToken, loginUser } = useContext(AuthContext) as AuthContextType
 
     const [isLoading, setIsLoading] = useState(true)
     const [isVerified, setIsVerified] = useState(user?.verified)
@@ -43,13 +44,20 @@ const Verify = () => {
                 onError: ({ graphQLErrors }) => {
                     setErrorMessages(graphQLErrors)
                 },
-            }).then(() => {
+            }).then(res => {
+                const user = res.data.verifyUser
+
+                console.log(user)
+                
+                setToken(user.token)
+                setUser(user)
+                loginUser(user)
+                setEdited(!edited)
                 setIsVerified(true)
-                setIsLoading(false)
             })
-        } else {
-            setIsLoading(false)
         }
+
+        setIsLoading(false)
     }
 
     setTimeout(() => {

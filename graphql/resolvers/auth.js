@@ -21,7 +21,10 @@ const usersResolvers = {
             _,
             { signupInput: { fullName, email, password } },
             { signup }
-        ) => signup({ fullName, email, password }),
+        ) => {
+            console.log("Signup")
+            return await signup({ fullName, email, password })
+        },
 
         login: async (_, { loginInput: { email, password } }, { login }) =>
             login({ email, password }),
