@@ -11,6 +11,7 @@ const {
 
 const { saltRounds } = require("../../utils/consts")
 const jwtConfig = require("../../utils/jwt.config")
+const sendMail = require("../../utils/send-mail")
 
 const User = require("../../models/User.model")
 
@@ -56,9 +57,19 @@ const authContext = {
 
         newUser.token = token
 
-        const res = await newUser.save()
+        const res = await newUser.save().then(res => {
+            sendMail(
+                email,
+                "Verify your account on our app",
+                `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${res._id}">Click here to verify your account</a>.`
+            )
 
-        return res._doc
+            return res
+        })
+
+        return res
+
+        // return res._doc
     },
 
     login: async ({ email, password }) => {
@@ -99,17 +110,11 @@ const authContext = {
 
         if (user) {
             if (user.verifyToken === verifyToken) {
-                User.findByIdAndUpdate(_id, { verified: true }, { new: true })
-
-                const token = jwt.sign(
-                    user._doc,
-                    process.env.TOKEN_SECRET,
-                    jwtConfig
+                return User.findByIdAndUpdate(
+                    _id,
+                    { verified: true },
+                    { new: true }
                 )
-
-                user.token = token
-
-                return user._doc
             } else {
                 throw new ApolloError(
                     "An error occured with your verify token.",

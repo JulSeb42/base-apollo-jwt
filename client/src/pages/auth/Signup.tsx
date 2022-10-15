@@ -21,7 +21,7 @@ const Signup = () => {
 
     const [inputs, setInputs] = useState({
         fullName: "Julien Sebag",
-        email: "a@b.com",
+        email: "julien.sebag@me.com",
         password: "Password42",
     })
     const [errorMessages, setErrorMessages] = useState<

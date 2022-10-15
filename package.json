@@ -12,6 +12,7 @@
         "graphql": "^16.6.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.6.5",
+        "nodemailer": "^6.8.0",
         "ts-utils-julseb": "^2.2.0"
     },
     "scripts": {
