@@ -2,12 +2,8 @@
 
 import React, { useContext, useState } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
-import {
-    Utils,
-    ThemeProvider,
-    ThemeContext,
-    ComponentProps,
-} from "tsx-library-julseb"
+import { ThemeProvider, ThemeContext, ComponentProps } from "tsx-library-julseb"
+import { uuid } from "./utils"
 
 import ProtectedRoutes from "./routes/ProtectedRoutes"
 import AnonRoutes from "./routes/AnonRoutes"
@@ -49,17 +45,18 @@ const App = () => {
                                 />
                             )
                         }
-                        key={Utils.uuid()}
+                        key={uuid()}
                     />
                 ))}
 
-                {redirects.map(({ path, to }) => (
-                    <Route
-                        path={path}
-                        element={<Navigate to={to} />}
-                        key={Utils.uuid()}
-                    />
-                ))}
+                {redirects.length > 0 &&
+                    redirects.map(({ path, to }) => (
+                        <Route
+                            path={path}
+                            element={<Navigate to={to} />}
+                            key={uuid()}
+                        />
+                    ))}
             </Routes>
         </ThemeProvider>
     )

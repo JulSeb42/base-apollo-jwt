@@ -2,8 +2,9 @@
 
 import React from "react"
 import { useQuery } from "@apollo/client"
-import { Text, PageLoading, Utils } from "tsx-library-julseb"
+import { Text, PageLoading } from "tsx-library-julseb"
 import { Link } from "react-router-dom"
+import { uuid } from "../../utils"
 
 import Page from "../../components/layouts/Page"
 
@@ -24,7 +25,7 @@ const AllUsers = () => {
             {data ? (
                 <Text tag="ul">
                     {allUsers.map(user => (
-                        <li key={Utils.uuid()}>
+                        <li key={uuid()}>
                             <Link to={`/users/${user._id}`}>
                                 {user.fullName}
                             </Link>

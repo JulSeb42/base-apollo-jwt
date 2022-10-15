@@ -4,18 +4,18 @@ import React, { useContext, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
-import { Text, PageLoading, Alert, Utils } from "tsx-library-julseb"
+import { Text, PageLoading } from "tsx-library-julseb"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
+import ErrorMessages from "../../components/ErrorMessages"
 
 import { VERIFY_USER } from "../../graphql/mutations"
 
 const Verify = () => {
     const { id, token } = useParams()
     const { isLoggedIn, user } = useContext(AuthContext) as AuthContextType
-    const { uuid } = Utils
 
     const [isLoading, setIsLoading] = useState(true)
     const [isVerified, setIsVerified] = useState(user?.verified)
@@ -47,6 +47,8 @@ const Verify = () => {
                 setIsVerified(true)
                 setIsLoading(false)
             })
+        } else {
+            setIsLoading(false)
         }
     }
 
@@ -75,12 +77,7 @@ const Verify = () => {
                         later.
                     </Text>
 
-                    {errorMessages &&
-                        errorMessages.map(({ message }) => (
-                            <Alert color="danger" key={uuid()}>
-                                {message}
-                            </Alert>
-                        ))}
+                    {errorMessages && <ErrorMessages errors={errorMessages} />}
                 </>
             ) : (
                 <>

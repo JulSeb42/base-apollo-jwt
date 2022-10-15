@@ -3,12 +3,12 @@
 import React, { useContext } from "react"
 import {
     Header as Container,
-    Utils,
     ButtonIcon,
     ThemeContext,
     ComponentProps,
 } from "tsx-library-julseb"
 import { NavLink } from "react-router-dom"
+import { uuid } from "../../utils"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
@@ -17,8 +17,6 @@ import siteData from "../../data/site-data"
 import { NavItemType } from "../../types"
 
 const Header = () => {
-    const { uuid } = Utils
-
     const { toggleTheme, selectedTheme } = useContext(
         ThemeContext
     ) as ComponentProps.ThemeContextProps

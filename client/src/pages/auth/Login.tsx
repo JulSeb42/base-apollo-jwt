@@ -1,7 +1,7 @@
 /*=============================================== Login ===============================================*/
 
 import React, { useState, useContext } from "react"
-import { Text, Form, Input, Alert, Utils } from "tsx-library-julseb"
+import { Text, Form, Input } from "tsx-library-julseb"
 import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
@@ -9,13 +9,13 @@ import { GraphQLErrors } from "@apollo/client/errors"
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
+import ErrorMessages from "../../components/ErrorMessages"
 
 import { LOGIN } from "../../graphql/mutations"
 
 const Login = () => {
     const navigate = useNavigate()
     const { loginUser } = useContext(AuthContext) as AuthContextType
-    const { uuid } = Utils
 
     const [login, { loading }] = useMutation(LOGIN)
 
@@ -76,12 +76,11 @@ const Login = () => {
                 />
             </Form>
 
-            {errorMessages &&
-                errorMessages.map(({ message }) => (
-                    <Alert color="danger" key={uuid()}>
-                        {message}
-                    </Alert>
-                ))}
+            {errorMessages && <ErrorMessages errors={errorMessages} />}
+
+            <Text>
+                <Link to="/login/forgot-password">I forgot my password.</Link>
+            </Text>
 
             <Text>
                 You don't have an account? <Link to="/signup">Sign up</Link>.

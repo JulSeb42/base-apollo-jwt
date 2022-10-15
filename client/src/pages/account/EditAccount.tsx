@@ -2,14 +2,7 @@
 
 import React, { useState, useContext } from "react"
 import { useMutation } from "@apollo/client"
-import {
-    Form,
-    Input,
-    Text,
-    Alert,
-    Utils,
-    PageLoading,
-} from "tsx-library-julseb"
+import { Form, Input, Text, PageLoading } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
 
@@ -17,6 +10,7 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
 import ErrorPage from "../../components/layouts/ErrorPage"
+import ErrorMessages from "../../components/ErrorMessages"
 import DangerZone from "../../components/DangerZone"
 
 import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
@@ -26,7 +20,6 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
     const navigate = useNavigate()
     const { user, setUser, setToken, logoutUser, isLoading, error } =
         useContext(AuthContext) as AuthContextType
-    const { uuid } = Utils
 
     const [editUser, { loading }] = useMutation(EDIT_USER)
 
@@ -123,12 +116,7 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                 />
             </Form>
 
-            {errorMessages &&
-                errorMessages.map(({ message }) => (
-                    <Alert color="danger" key={uuid()}>
-                        {message}
-                    </Alert>
-                ))}
+            {errorMessages && <ErrorMessages errors={errorMessages} />}
 
             <DangerZone
                 texts={{

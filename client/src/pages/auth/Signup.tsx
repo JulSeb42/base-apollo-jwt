@@ -1,7 +1,7 @@
 /*=============================================== Signup ===============================================*/
 
 import React, { useState, useContext } from "react"
-import { Text, Form, Input, Alert, Utils } from "tsx-library-julseb"
+import { Text, Form, Input } from "tsx-library-julseb"
 import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
@@ -9,13 +9,13 @@ import { GraphQLErrors } from "@apollo/client/errors"
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
+import ErrorMessages from "../../components/ErrorMessages"
 
 import { SIGNUP } from "../../graphql/mutations"
 
 const Signup = () => {
     const navigate = useNavigate()
     const { loginUser } = useContext(AuthContext) as AuthContextType
-    const { uuid } = Utils
 
     const [signup, { loading }] = useMutation(SIGNUP)
 
@@ -48,7 +48,7 @@ const Signup = () => {
         })
             .then(res => {
                 loginUser(res.data.signup)
-                navigate(-1)
+                navigate("/thank-you")
             })
             .catch(err => console.log(err))
     }
@@ -86,12 +86,7 @@ const Signup = () => {
                 />
             </Form>
 
-            {errorMessages &&
-                errorMessages.map(({ message }) => (
-                    <Alert color="danger" key={uuid()}>
-                        {message}
-                    </Alert>
-                ))}
+            {errorMessages && <ErrorMessages errors={errorMessages} />}
 
             <Text>
                 You already have an account? <Link to="/login">Log in</Link>.
