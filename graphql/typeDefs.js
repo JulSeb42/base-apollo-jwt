@@ -8,7 +8,10 @@ const typeDefs = gql`
         email: String
         password: String
         token: String
-        id: ID
+        _id: ID
+        verified: Boolean
+        verifyToken: String
+        resetToken: String
     }
 
     input SignupInput {
@@ -18,26 +21,33 @@ const typeDefs = gql`
         token: String
     }
 
+    input VerifyInput {
+        _id: ID!
+        verifyToken: String
+    }
+
     input LoginInput {
         email: String
         password: String
     }
 
     input EditUserInput {
-        id: ID!
+        _id: ID!
         fullName: String
     }
 
     type Query {
-        getUser(id: ID!): User
+        getUser(_id: ID!): User
         allUsers: [User]
     }
 
     type Mutation {
         signup(signupInput: SignupInput): User
+        verifyUser(verifyInput: VerifyInput): User
         login(loginInput: LoginInput): User
+
         editUser(editUserInput: EditUserInput): User
-        deleteUser(id: ID): String
+        deleteUser(_id: ID!): String
     }
 `
 

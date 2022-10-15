@@ -1,39 +1,23 @@
 /*=============================================== Users resolvers ===============================================*/
 
 const { ApolloError } = require("apollo-server-errors")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
 
 const User = require("../../models/User.model")
-const { saltRounds } = require("../../utils/consts")
-const jwtConfig = require("../../utils/jwt.config")
 
 const usersResolvers = {
     Query: {
         allUsers: async () => await User.find(),
-        getUser: async (_, { id }) => await User.findById(id),
+        getUser: async (_, { _id }) => await User.findById(_id),
     },
 
     Mutation: {
-        editUser: async (_, { editUserInput: { id, fullName } }) => {
-            const updatedUser = {}
+        editUser: async (
+            _,
+            { editUserInput: { _id, fullName } },
+            { editUser }
+        ) => editUser({ _id, fullName }),
 
-            if (fullName !== undefined) {
-                updatedUser.fullName = fullName
-            }
-
-            const user = await User.findByIdAndUpdate(id, updatedUser, { new: true })
-
-            return user
-        },
-        deleteUser: async (_, { id }) => {
-            if (!id) {
-                throw new ApolloError("ID is missing", "ID_MISSING")
-            }
-            
-            await User.findByIdAndDelete(id)
-            return `User ${id} was deleted successfully`
-        },
+        deleteUser: async (_, { _id }, { deleteUser }) => deleteUser({ _id }),
     },
 }
 

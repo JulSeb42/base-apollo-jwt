@@ -21,6 +21,8 @@ const MyAccount = () => {
         <Page title={user.fullName}>
             <Text tag="h1">Hello {user.fullName}</Text>
 
+            {!user.verified && <Text>Your account is not verified.</Text>}
+
             <Text>
                 <Link to="/my-account/edit">Edit your account.</Link>
             </Text>

@@ -16,7 +16,7 @@ const PublicProfile = () => {
 
     const { data, loading, error } = useQuery(GET_USER, {
         variables: {
-            id,
+            _id: id,
         },
     })
 

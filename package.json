@@ -15,8 +15,8 @@
         "ts-utils-julseb": "^2.2.0"
     },
     "scripts": {
-        "dev": "nodemon index.js",
+        "server": "nodemon index.js",
         "client": "cd client && yarn start",
-        "start": "concurrently --kill-others 'yarn dev' 'yarn client'"
+        "dev": "concurrently --kill-others 'yarn server' 'yarn client'"
     }
 }

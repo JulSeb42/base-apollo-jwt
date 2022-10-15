@@ -25,7 +25,7 @@ const AllUsers = () => {
                 <Text tag="ul">
                     {allUsers.map(user => (
                         <li key={Utils.uuid()}>
-                            <Link to={`/users/${user._id || user.id}`}>
+                            <Link to={`/users/${user._id}`}>
                                 {user.fullName}
                             </Link>
                         </li>

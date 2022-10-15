@@ -2,13 +2,21 @@
 
 import React, { useState, useContext } from "react"
 import { useMutation } from "@apollo/client"
-import { Form, Input, Text, Alert, Utils } from "tsx-library-julseb"
+import {
+    Form,
+    Input,
+    Text,
+    Alert,
+    Utils,
+    PageLoading,
+} from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
+import ErrorPage from "../../components/layouts/ErrorPage"
 import DangerZone from "../../components/DangerZone"
 
 import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
@@ -16,16 +24,15 @@ import { EditPagesTypes } from "../../types"
 
 const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
     const navigate = useNavigate()
-    const { user, setUser, setToken, logoutUser } = useContext(
-        AuthContext
-    ) as AuthContextType
+    const { user, setUser, setToken, logoutUser, isLoading, error } =
+        useContext(AuthContext) as AuthContextType
     const { uuid } = Utils
 
     const [editUser, { loading }] = useMutation(EDIT_USER)
 
     const [inputs, setInputs] = useState({
-        fullName: user?.fullName,
-        id: user?._id,
+        fullName: !isLoading ? user?.fullName : "",
+        _id: !isLoading ? user?._id : "",
     })
     const [errorMessages, setErrorMessages] = useState<
         GraphQLErrors | undefined
@@ -40,38 +47,51 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        editUser({
-            variables: {
-                editUserInput: inputs,
-            },
+        if (user) {
+            editUser({
+                variables: {
+                    editUserInput: {
+                        ...inputs,
+                        _id: user._id,
+                    },
+                },
 
-            onError: ({ graphQLErrors }) => {
-                setErrorMessages(graphQLErrors)
-            },
-        }).then(res => {
-            setToken(res.data.editUser.token)
-            setUser(res.data.editUser)
-            setEdited(!edited)
-            navigate(-1)
-        })
+                onError: ({ graphQLErrors }) => {
+                    setErrorMessages(graphQLErrors)
+                },
+            }).then(res => {
+                const user = res.data.editUser
+                setToken(user.token)
+                setUser(user)
+                setEdited(!edited)
+                navigate("/my-account")
+            })
+        }
     }
 
     const [deleteUser, { loading: deleteLoading }] = useMutation(DELETE_USER)
 
     const handleDelete = () => {
-        deleteUser({
-            variables: {
-                id: user?._id,
-            },
+        if (user) {
+            deleteUser({
+                variables: {
+                    _id: user._id,
+                },
 
-            onError: ({ graphQLErrors }) => {
-                console.log(graphQLErrors[0])
-            },
-        }).then(() => {
-            logoutUser()
-            navigate("/login")
-        })
+                onError: ({ graphQLErrors }) => {
+                    console.log(graphQLErrors[0])
+                },
+            }).then(() => {
+                logoutUser()
+                navigate("/login")
+            })
+        } else {
+            console.log("No ID")
+        }
     }
+
+    if (isLoading) return <PageLoading />
+    if (error) return <ErrorPage error={error[0].message} />
 
     return (
         <Page title="Edit your account" mainWidth="form">
@@ -81,7 +101,7 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                 buttonPrimary="Edit your account"
                 buttonSecondary={{ text: "Cancel", to: "/my-account" }}
                 onSubmit={handleSubmit}
-                isLoading={loading}
+                isLoading={loading || isLoading || !user?._id}
             >
                 <Input
                     id="fullName"

@@ -9,6 +9,7 @@ import AllUsers from "../pages/user/AllUsers"
 import PublicProfile from "../pages/user/PublicProfile"
 
 import Signup from "../pages/auth/Signup"
+import Verify from "../pages/auth/Verify"
 import Login from "../pages/auth/Login"
 
 import MyAccount from "../pages/account/MyAccount"
@@ -45,6 +46,10 @@ const routes: RouteType[] = [
         path: "/signup",
         element: Signup,
         anon: true,
+    },
+    {
+        path: "/verify/:token/:id",
+        element: Verify,
     },
     {
         path: "/login",

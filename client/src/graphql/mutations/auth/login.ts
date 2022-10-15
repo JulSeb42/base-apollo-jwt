@@ -5,11 +5,12 @@ import { gql } from "@apollo/client"
 const LOGIN = gql`
     mutation login($loginInput: LoginInput) {
         login(loginInput: $loginInput) {
-            id
+            _id
             fullName
             email
             password
             token
+            verified
         }
     }
 `
