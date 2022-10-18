@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react"
 import { useMutation } from "@apollo/client"
 import { Form, Input, Text, PageLoading } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
@@ -117,6 +117,10 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
             </Form>
 
             {errorMessages && <ErrorMessages errors={errorMessages} />}
+
+            <Text>
+                <Link to="/my-account/edit-password">Edit your password.</Link>
+            </Text>
 
             <DangerZone
                 texts={{

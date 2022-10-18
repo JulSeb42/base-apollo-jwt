@@ -35,6 +35,12 @@ const typeDefs = gql`
         fullName: String
     }
 
+    input EditPasswordInput {
+        _id: ID!
+        oldPassword: String!
+        newPassword: String!
+    }
+
     type User {
         fullName: String
         email: String
@@ -52,13 +58,14 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        signup(signupInput: SignupInput): User
-        verifyUser(verifyInput: VerifyInput): User
-        login(loginInput: LoginInput): User
-        forgotPassword(forgotInput: ForgotInput): User
-        resetPassword(resetInput: ResetInput): User
+        signup(signupInput: SignupInput): User!
+        verifyUser(verifyInput: VerifyInput): User!
+        login(loginInput: LoginInput): User!
+        forgotPassword(forgotInput: ForgotInput): User!
+        resetPassword(resetInput: ResetInput): User!
 
-        editUser(editUserInput: EditUserInput): User
+        editUser(editUserInput: EditUserInput): User!
+        editPassword(editPasswordInput: EditPasswordInput): User!
         deleteUser(_id: ID!): String
     }
 `

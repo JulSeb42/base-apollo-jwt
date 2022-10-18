@@ -16,4 +16,4 @@ const SIGNUP = gql`
     }
 `
 
-export default SIGNUP
+export { SIGNUP }

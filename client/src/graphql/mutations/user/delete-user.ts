@@ -8,4 +8,4 @@ const DELETE_USER = gql`
     }
 `
 
-export default DELETE_USER
+export { DELETE_USER }

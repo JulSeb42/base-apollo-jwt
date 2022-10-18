@@ -10,4 +10,4 @@ const RESET_PASSWORD = gql`
     }
 `
 
-export default RESET_PASSWORD
+export { RESET_PASSWORD }

@@ -18,6 +18,7 @@ import ResetPassword from "../pages/auth/ResetPassword"
 
 import MyAccount from "../pages/account/MyAccount"
 import EditAccount from "../pages/account/EditAccount"
+import EditPassword from "../pages/account/EditPassword"
 
 type RouteType = {
     path: string
@@ -89,6 +90,12 @@ const routes: RouteType[] = [
     {
         path: "/my-account/edit",
         element: EditAccount,
+        protected: true,
+        edit: true,
+    },
+    {
+        path: "/my-account/edit-password",
+        element: EditPassword,
         protected: true,
         edit: true,
     },

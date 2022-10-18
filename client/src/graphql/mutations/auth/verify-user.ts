@@ -16,4 +16,4 @@ const VERIFY_USER = gql`
     }
 `
 
-export default VERIFY_USER
+export { VERIFY_USER }

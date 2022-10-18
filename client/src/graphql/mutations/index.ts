@@ -1,20 +1,11 @@
 /*=============================================== Mutations ===============================================*/
 
-import SIGNUP from "./auth/signup"
-import LOGIN from "./auth/login"
-import VERIFY_USER from "./auth/verify-user"
-import FORGOT_PASSWORD from "./auth/forgotPassword"
-import RESET_PASSWORD from "./auth/resetPassword"
+export * from "./auth/login"
+export * from "./auth/signup"
+export * from "./auth/verify-user"
+export * from "./auth/forgot-password"
+export * from "./auth/reset-password"
 
-import EDIT_USER from "./user/edit-user"
-import DELETE_USER from "./user/delete-user"
-
-export {
-    SIGNUP,
-    LOGIN,
-    VERIFY_USER,
-    FORGOT_PASSWORD,
-    RESET_PASSWORD,
-    EDIT_USER,
-    DELETE_USER,
-}
+export * from "./user/edit-user"
+export * from "./user/edit-password"
+export * from "./user/delete-user"

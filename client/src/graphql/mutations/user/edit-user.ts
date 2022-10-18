@@ -14,4 +14,4 @@ const EDIT_USER = gql`
     }
 `
 
-export default EDIT_USER
+export { EDIT_USER }

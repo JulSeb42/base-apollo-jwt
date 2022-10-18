@@ -10,4 +10,4 @@ const FORGOT_PASSWORD = gql`
     }
 `
 
-export default FORGOT_PASSWORD
+export { FORGOT_PASSWORD }
