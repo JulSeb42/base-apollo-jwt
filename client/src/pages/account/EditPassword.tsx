@@ -22,8 +22,8 @@ const EditPassword = ({ edited, setEdited }: EditPagesTypes) => {
     ) as AuthContextType
 
     const [inputs, setInputs] = useState({
-        oldPassword: "Password43",
-        newPassword: "Password42",
+        oldPassword: "",
+        newPassword: "",
     })
     const [errorMessages, setErrorMessages] = useState<
         GraphQLErrors | undefined

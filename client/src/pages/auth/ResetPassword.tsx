@@ -16,7 +16,7 @@ const ResetPassword = () => {
     const navigate = useNavigate()
     const { token, id } = useParams()
 
-    const [password, setPassword] = useState("Password43")
+    const [password, setPassword] = useState("")
     const [validation, setValidation] =
         useState<ComponentProps.ValidationStatusProps>(undefined)
     const [errorMessages, setErrorMessages] = useState<

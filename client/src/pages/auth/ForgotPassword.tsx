@@ -14,7 +14,7 @@ import { FORGOT_PASSWORD } from "../../graphql/mutations"
 const ForgotPassword = () => {
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState("julien.sebag@me.com")
+    const [email, setEmail] = useState("")
     const [errorMessages, setErrorMessages] = useState<
         undefined | GraphQLErrors
     >(undefined)
