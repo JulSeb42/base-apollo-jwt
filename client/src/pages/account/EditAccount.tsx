@@ -76,7 +76,7 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                 },
             }).then(() => {
                 logoutUser()
-                navigate("/login")
+                navigate("/goodbye")
             })
         } else {
             console.log("No ID")

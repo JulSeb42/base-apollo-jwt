@@ -15,6 +15,7 @@ import Login from "../pages/auth/Login"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import ForgotSent from "../pages/auth/ForgotSent"
 import ResetPassword from "../pages/auth/ResetPassword"
+import Goodbye from "../pages/auth/Goodbye"
 
 import MyAccount from "../pages/account/MyAccount"
 import EditAccount from "../pages/account/EditAccount"
@@ -79,6 +80,11 @@ const routes: RouteType[] = [
     {
         path: "/reset-password/:token/:id",
         element: ResetPassword,
+        anon: true,
+    },
+    {
+        path: "/goodbye",
+        element: Goodbye,
         anon: true,
     },
 
