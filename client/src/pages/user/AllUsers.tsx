@@ -23,15 +23,19 @@ const AllUsers = () => {
             <Text tag="h1">All users</Text>
 
             {data ? (
-                <Text tag="ul">
-                    {allUsers.map(user => (
-                        <li key={uuid()}>
-                            <Link to={`/users/${user._id}`}>
-                                {user.fullName}
-                            </Link>
-                        </li>
-                    ))}
-                </Text>
+                allUsers.length ? (
+                    <Text tag="ul">
+                        {allUsers.map(user => (
+                            <li key={uuid()}>
+                                <Link to={`/users/${user._id}`}>
+                                    {user.fullName}
+                                </Link>
+                            </li>
+                        ))}
+                    </Text>
+                ) : (
+                    <Text>No user.</Text>
+                )
             ) : (
                 <Text>{error?.message}</Text>
             )}
