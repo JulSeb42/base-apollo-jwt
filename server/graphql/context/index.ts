@@ -1,11 +1,11 @@
 /*=============================================== Context ===============================================*/
 
-import AuthContext from "./Auth"
-import UsersContext from "./User"
+import { UserContext } from "./User"
+import { AuthContext } from "./Auth"
 
 const context = {
     ...AuthContext,
-    ...UsersContext,
+    ...UserContext,
 }
 
 export default context

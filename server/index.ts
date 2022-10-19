@@ -1,15 +1,20 @@
 /*=============================================== Server ===============================================*/
 
 import { ApolloServer } from "apollo-server"
-import "dotenv/config"
-
-import "./db"
 
 import typeDefs from "./graphql/typeDefs"
 import resolvers from "./graphql/resolvers"
 import context from "./graphql/context"
 
+import "./db"
+
 import { PORT } from "./utils/consts"
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context,
+})
 
 const initServer = async () => {
     const server = new ApolloServer({

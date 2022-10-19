@@ -1,11 +1,17 @@
 /*=============================================== Resolvers ===============================================*/
 
-import Query from "./queries"
-import * as Mutation from "./mutations"
+import { Query } from "./queries"
+import { AuthMutation, UserMutation } from "./mutations"
 
 const resolvers = {
+    // Queries
     Query,
-    ...Mutation,
+
+    // Mutations
+    Mutation: {
+        ...AuthMutation,
+        ...UserMutation,
+    },
 }
 
 export default resolvers

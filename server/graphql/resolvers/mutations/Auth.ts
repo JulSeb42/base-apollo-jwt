@@ -1,8 +1,6 @@
 /*=============================================== Auth mutations ===============================================*/
 
-import { UserType } from "../../../types"
-
-const Auth = {
+const AuthMutation = {
     signup: async (
         _: any,
         { signupInput: { fullName, email, password } }: any,
@@ -38,4 +36,4 @@ const Auth = {
     },
 }
 
-export default Auth
+export { AuthMutation }

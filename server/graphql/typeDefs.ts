@@ -7,17 +7,16 @@ const typeDefs = gql`
         fullName: String!
         email: String!
         password: String!
-        token: String
-    }
-
-    input VerifyInput {
-        _id: ID!
-        verifyToken: String!
     }
 
     input LoginInput {
         email: String!
         password: String!
+    }
+
+    input VerifyInput {
+        _id: ID!
+        verifyToken: String!
     }
 
     input ForgotInput {
@@ -42,19 +41,19 @@ const typeDefs = gql`
     }
 
     type User {
+        _id: ID!
         fullName: String
         email: String
         password: String
-        token: String
-        _id: ID
         verified: Boolean
         verifyToken: String
         resetToken: String
+        token: String
     }
 
     type Query {
-        getUser(_id: ID!): User
-        allUsers: [User]
+        users: [User]
+        user(_id: ID!): User
     }
 
     type Mutation {

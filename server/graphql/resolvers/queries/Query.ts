@@ -1,12 +1,11 @@
-/*=============================================== Query ===============================================*/
-
-import User from "../../../models/User.model"
-
-import { UserType } from "../../../types"
+/*=============================================== Queries ===============================================*/
 
 const Query = {
-    allUsers: async () => await User.find(),
-    getUser: async (_: any, { _id }: UserType) => await User.findById(_id),
+    users: async (_: any, __: any, { users }: any) => {
+        console.log("Users query")
+        return await users()
+    },
+    user: async (_: any, { _id }: any, { user }: any) => await user({ _id }),
 }
 
 export { Query }

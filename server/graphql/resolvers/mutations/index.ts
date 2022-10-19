@@ -1,11 +1,4 @@
-/*=============================================== Mutations ===============================================*/
+/*=============================================== Export mutations ===============================================*/
 
-import Auth from "./Auth"
-import User from "./User"
-
-const Mutation = {
-    ...Auth,
-    ...User,
-}
-
-export { Mutation }
+export * from "./Auth"
+export * from "./User"

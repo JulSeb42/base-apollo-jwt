@@ -3,7 +3,7 @@
 import { gql } from "@apollo/client"
 
 const SIGNUP = gql`
-    mutation signup($signupInput: SignupInput) {
+    mutation ($signupInput: SignupInput) {
         signup(signupInput: $signupInput) {
             _id
             email

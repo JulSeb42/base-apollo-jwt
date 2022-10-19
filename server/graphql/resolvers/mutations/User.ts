@@ -1,6 +1,6 @@
 /*=============================================== User mutations ===============================================*/
 
-const User = {
+const UserMutation = {
     editUser: async (
         _: any,
         { editUserInput: { _id, fullName } }: any,
@@ -17,4 +17,4 @@ const User = {
         deleteUser({ _id }),
 }
 
-export default User
+export { UserMutation }

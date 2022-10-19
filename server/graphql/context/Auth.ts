@@ -10,21 +10,12 @@ import sendMail from "../../utils/send-mail"
 import User from "../../models/User.model"
 import { UserType } from "../../types"
 
-import { SALT_ROUNDS, JWT_CONFIG } from "../../utils/consts"
-
-const TOKEN_SECRET = process.env.TOKEN_SECRET || ""
+import { SALT_ROUNDS, JWT_CONFIG, TOKEN_SECRET } from "../../utils/consts"
 
 const AuthContext = {
     signup: async ({ fullName, email, password }: UserType) => {
         const foundUser = await User.findOne({ email })
         const verifyToken = getRandomString(20)
-
-        if (foundUser) {
-            throw new ApolloError(
-                `A user already exists with the email ${email}`,
-                "USER_ALREADY_EXISTS"
-            )
-        }
 
         if (!emailRegex.test(email)) {
             throw new ApolloError("Email is not valid.", "EMAIL_NOT_VALID")
@@ -37,38 +28,44 @@ const AuthContext = {
             )
         }
 
-        const salt = bcrypt.genSaltSync(SALT_ROUNDS)
-        const hashedPassword = bcrypt.hashSync(password, salt)
+        if (!foundUser) {
+            const salt = bcrypt.genSaltSync(SALT_ROUNDS)
+            const hashedPassword = bcrypt.hashSync(password, salt)
 
-        const newUser: any = new User({
-            fullName,
-            email,
-            password: hashedPassword,
-            verified: false,
-            verifyToken,
-        })
-
-        const token = jwt.sign(
-            newUser._doc,
-            TOKEN_SECRET,
-            // @ts-expect-error
-            JWT_CONFIG
-        )
-
-        newUser.token = token
-
-        const res = await newUser.save().then((res: any) => {
-            sendMail(
+            const newUser: any = new User({
+                fullName,
                 email,
-                "Verify your account on our app",
-                `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${res._id}">Click here to verify your account</a>.`
+                password: hashedPassword,
+                verified: false,
+                verifyToken,
+            })
+
+            const token = jwt.sign(
+                newUser._doc,
+                TOKEN_SECRET,
+                // @ts-expect-error
+                JWT_CONFIG
             )
 
-            return res
-        })
-        // const res = await newUser.save()
+            newUser.token = token
 
-        return res
+            const res = await newUser.save().then((res: any) => {
+                sendMail(
+                    email,
+                    "Verify your account on our app",
+                    `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${res._id}">Click here to verify your account</a>.`
+                )
+
+                return res
+            })
+
+            return res
+        } else {
+            throw new ApolloError(
+                `A user already exists with the email ${email}`,
+                "USER_ALREADY_EXISTS"
+            )
+        }
     },
 
     login: async ({ email, password }: UserType) => {
@@ -80,32 +77,35 @@ const AuthContext = {
             throw new ApolloError("Password is required", "PASSWORD_REQUIRED")
         }
 
-        const user: any = await User.findOne({ email })
+        const foundUser: any = await User.findOne({ email })
 
-        if (!user) {
+        if (foundUser) {
+            if (await bcrypt.compare(password, foundUser.password)) {
+                // @ts-expect-error
+                const token = jwt.sign(user._doc, TOKEN_SECRET, JWT_CONFIG)
+
+                foundUser.token = token
+
+                return foundUser._doc
+            } else {
+                throw new ApolloError(
+                    "Incorrect password",
+                    "INCORRECT_PASSWORD"
+                )
+            }
+        } else {
             throw new ApolloError(
                 "This user does not exist.",
                 "USER_NON_EXISTENT"
             )
         }
-
-        if (user && (await bcrypt.compare(password, user.password))) {
-            // @ts-expect-error
-            const token = jwt.sign(user._doc, TOKEN_SECRET, JWT_CONFIG)
-
-            user.token = token
-
-            return user._doc
-        } else {
-            throw new ApolloError("Incorrect password", "INCORRECT_PASSWORD")
-        }
     },
 
-    verifyUser: async ({ _id, verifyToken }: any) => {
-        const user: UserType | undefined | null = await User.findById(_id)
+    verifyUser: async ({ _id, verifyToken }: UserType) => {
+        const foundUser = await User.findById(_id)
 
-        if (user) {
-            if (user.verifyToken === verifyToken) {
+        if (foundUser) {
+            if (foundUser.verifyToken === verifyToken) {
                 return User.findByIdAndUpdate(
                     _id,
                     { verified: true },
@@ -123,9 +123,9 @@ const AuthContext = {
     },
 
     forgotPassword: async ({ email }: UserType) => {
-        const user = await User.findOne({ email })
+        const foundUser = await User.findOne({ email })
 
-        if (user) {
+        if (foundUser) {
             const resetToken = getRandomString(20)
 
             const res = await User.findOneAndUpdate(
@@ -149,10 +149,10 @@ const AuthContext = {
     },
 
     resetPassword: async ({ _id, resetToken, password }: UserType) => {
-        const user: null | undefined | UserType = await User.findById(_id)
+        const foundUser = await User.findById(_id)
 
-        if (user) {
-            if (user.resetToken === resetToken) {
+        if (foundUser) {
+            if (foundUser.resetToken === resetToken) {
                 const updatedUser: any = {}
 
                 if (password) {
@@ -186,4 +186,4 @@ const AuthContext = {
     },
 }
 
-export default AuthContext
+export { AuthContext }
