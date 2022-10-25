@@ -9,7 +9,7 @@ import { UserType } from "../../types"
 
 import { SALT_ROUNDS } from "../../utils/consts"
 
-const UserContext = {
+export const UserContext = {
     users: async () => await User.find(),
     user: async ({ _id }: any) => await User.findById(_id),
 
@@ -78,8 +78,6 @@ const UserContext = {
         return `User ${_id} was deleted successfully`
     },
 }
-
-export { UserContext }
 
 type EditPasswordType = {
     _id: string

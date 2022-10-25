@@ -1,6 +1,6 @@
 /*=============================================== Auth mutations ===============================================*/
 
-const AuthMutation = {
+export const AuthMutation = {
     signup: async (
         _: any,
         { signupInput: { fullName, email, password } }: any,
@@ -35,5 +35,3 @@ const AuthMutation = {
         return await resetPassword({ _id, resetToken, password })
     },
 }
-
-export { AuthMutation }

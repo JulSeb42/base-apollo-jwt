@@ -1,12 +1,11 @@
 /*=============================================== User type ===============================================*/
 
-type UserType = {
+export type UserType = {
     _id: string
     fullName: string
     email: string
     password: string
     verifyToken: string
     resetToken?: string
+    token: string
 }
-
-export { UserType }
