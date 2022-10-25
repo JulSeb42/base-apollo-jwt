@@ -41,6 +41,7 @@ const AuthProviderWrapper = ({ children }: Props) => {
 
     const logoutUser = () => {
         localStorage.removeItem("authToken")
+        setIsLoggedIn(false)
     }
 
     const { data, loading } = useQuery(LOGGED_IN_USER, {
@@ -57,6 +58,7 @@ const AuthProviderWrapper = ({ children }: Props) => {
             setIsLoggedIn(true)
         } else {
             setIsLoggedIn(false)
+            setIsLoading(false)
         }
     }, [data, loading, authToken])
 
