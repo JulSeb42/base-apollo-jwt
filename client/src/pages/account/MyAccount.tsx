@@ -1,7 +1,7 @@
 /*=============================================== MyAccount ===============================================*/
 
 import React, { useContext } from "react"
-import { PageLoading, Text } from "tsx-library-julseb"
+import { Text } from "tsx-library-julseb"
 import { Link } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
@@ -11,10 +11,8 @@ import Page from "../../components/layouts/Page"
 const MyAccount = () => {
     const { user, isLoading } = useContext(AuthContext) as AuthContextType
 
-    if (isLoading) return <PageLoading />
-
     return user ? (
-        <Page title={user.fullName}>
+        <Page title={user.fullName} isLoading={isLoading}>
             <Text tag="h1">Hello {user.fullName}</Text>
 
             {!user.verified && <Text>Your account is not verified.</Text>}

@@ -1,8 +1,7 @@
 /*=============================================== Queries ===============================================*/
 
+import { UserQuery } from "./user/UserQuery"
+
 export const Query = {
-    loggedInUser: async (_: any, { token }: any, { loggedInUser }: any) =>
-        await loggedInUser({ token }),
-    users: async (_: any, __: any, { users }: any) => await users(),
-    user: async (_: any, { _id }: any, { user }: any) => await user({ _id }),
+    ...UserQuery,
 }

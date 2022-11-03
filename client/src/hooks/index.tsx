@@ -2,7 +2,7 @@
 
 import { Hooks } from "tsx-library-julseb"
 
-const {
+export const {
     useClickOutside,
     useCopyToClipboard,
     useFetch,
@@ -12,16 +12,5 @@ const {
     useMaxWidth,
     useMinWidth,
     useTranslation,
+    useTouchScreen,
 } = Hooks
-
-export {
-    useClickOutside,
-    useCopyToClipboard,
-    useFetch,
-    useForm,
-    useKeyPress,
-    useLocalStorage,
-    useMaxWidth,
-    useMinWidth,
-    useTranslation,
-}

@@ -11,27 +11,23 @@ export const AuthMutation = {
         _: any,
         { loginInput: { email, password } }: any,
         { login }: any
-    ) => login({ email, password }),
+    ) => await login({ email, password }),
 
     verifyUser: async (
         _: any,
         { verifyInput: { _id, verifyToken } }: any,
         { verifyUser }: any
-    ) => verifyUser({ _id, verifyToken }),
+    ) => await verifyUser({ _id, verifyToken }),
 
     forgotPassword: async (
         _: any,
         { forgotInput: { email } }: any,
         { forgotPassword }: any
-    ) => {
-        return await forgotPassword({ email })
-    },
+    ) => await forgotPassword({ email }),
 
     resetPassword: async (
         _: any,
         { resetInput: { _id, resetToken, password } }: any,
         { resetPassword }: any
-    ) => {
-        return await resetPassword({ _id, resetToken, password })
-    },
+    ) => await resetPassword({ _id, resetToken, password }),
 }

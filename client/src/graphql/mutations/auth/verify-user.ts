@@ -2,7 +2,7 @@
 
 import { gql } from "@apollo/client"
 
-const VERIFY_USER = gql`
+export const VERIFY_USER = gql`
     mutation verifyUser($verifyInput: VerifyInput) {
         verifyUser(verifyInput: $verifyInput) {
             _id
@@ -15,5 +15,3 @@ const VERIFY_USER = gql`
         }
     }
 `
-
-export { VERIFY_USER }

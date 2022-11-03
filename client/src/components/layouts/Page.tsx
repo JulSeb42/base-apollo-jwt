@@ -1,11 +1,10 @@
 /*=============================================== Page ===============================================*/
 
 import React from "react"
-import { Helmet, Wrapper, Main } from "tsx-library-julseb"
+import { Wrapper, Main, PageLoading, Text } from "tsx-library-julseb"
 
+import Helmet from "./Helmet"
 import Header from "./Header"
-
-import siteData from "../../data/site-data"
 
 const Page = ({
     title,
@@ -15,30 +14,38 @@ const Page = ({
     template = "1col",
     children,
     mainWidth = "default",
+    isLoading,
+    error,
 }: Props) => {
     return (
         <>
             <Helmet
-                title={`${title} | ${siteData.name}`}
+                title={error ? "An error occured" : title}
                 description={description}
-                keywords={[...siteData.keywords, keywords]}
-                favicon={siteData.favicon}
-                author={siteData.author}
-                type={siteData.type}
-                cover={cover || siteData.cover}
-                siteName={siteData.name}
-                language={siteData.language}
+                keywords={keywords}
+                cover={cover}
             />
 
-            <Header />
+            {isLoading ? (
+                <PageLoading />
+            ) : error ? (
+                <>
+                    <Text tag="h1">An error occured</Text>
+                    <Text>{error}</Text>
+                </>
+            ) : (
+                <>
+                    <Header />
 
-            <Wrapper template={template}>
-                {template !== "1col" ? (
-                    children
-                ) : (
-                    <Main size={mainWidth}>{children}</Main>
-                )}
-            </Wrapper>
+                    <Wrapper template={template}>
+                        {template !== "1col" ? (
+                            children
+                        ) : (
+                            <Main size={mainWidth}>{children}</Main>
+                        )}
+                    </Wrapper>
+                </>
+            )}
         </>
     )
 }
@@ -53,4 +60,6 @@ interface Props {
     template?: "1col" | "2cols" | "3cols"
     children?: any
     mainWidth?: "default" | "large" | "form" | number
+    isLoading?: boolean
+    error?: string
 }

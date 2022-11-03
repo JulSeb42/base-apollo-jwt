@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, createContext } from "react"
 import { useQuery } from "@apollo/client"
-import { GraphQLErrors } from "@apollo/client/errors"
 
 import { UserType } from "../types"
 
@@ -16,12 +15,13 @@ export type AuthContextType = {
     loginUser: (user: UserType) => void
     logoutUser: () => void
     setToken: (token: string) => void
-    error?: GraphQLErrors
 }
 
-const AuthContext = createContext<UserType | AuthContextType | null>(null)
+export const AuthContext = createContext<UserType | AuthContextType | null>(
+    null
+)
 
-const AuthProviderWrapper = ({ children }: Props) => {
+export const AuthProviderWrapper = ({ children }: Props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useState<UserType | null>(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -78,8 +78,6 @@ const AuthProviderWrapper = ({ children }: Props) => {
         </AuthContext.Provider>
     )
 }
-
-export { AuthProviderWrapper, AuthContext }
 
 interface Props {
     children?: any

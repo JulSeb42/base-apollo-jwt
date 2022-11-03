@@ -83,7 +83,7 @@ const Header = () => {
                 variant="transparent"
                 color="background"
                 onClick={toggleTheme}
-                aria-label="Toggle theme"
+                label="Toggle theme"
             />
         </Container>
     )

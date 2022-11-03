@@ -2,24 +2,23 @@
 
 import React, { useState, useContext } from "react"
 import { useMutation } from "@apollo/client"
-import { Form, Input, Text, PageLoading } from "tsx-library-julseb"
+import { Form, Input, Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate, Link } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import ErrorMessages from "../../components/ErrorMessages"
 import DangerZone from "../../components/DangerZone"
 
 import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
-import { EditPagesTypes } from "../../types"
 
-const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
+const EditAccount = () => {
     const navigate = useNavigate()
-    const { user, setUser, setToken, logoutUser, isLoading, error } =
-        useContext(AuthContext) as AuthContextType
+    const { user, setUser, setToken, logoutUser, isLoading } = useContext(
+        AuthContext
+    ) as AuthContextType
 
     const [editUser, { loading }] = useMutation(EDIT_USER)
 
@@ -56,7 +55,6 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                 const user = res.data.editUser
                 setToken(user.token)
                 setUser(user)
-                setEdited(!edited)
                 navigate("/my-account")
             })
         }
@@ -72,7 +70,7 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
                 },
 
                 onError: ({ graphQLErrors }) => {
-                    console.log(graphQLErrors[0])
+                    setErrorMessages(graphQLErrors)
                 },
             }).then(() => {
                 logoutUser()
@@ -83,11 +81,12 @@ const EditAccount = ({ edited, setEdited }: EditPagesTypes) => {
         }
     }
 
-    if (isLoading) return <PageLoading />
-    if (error) return <ErrorPage error={error[0].message} />
-
     return (
-        <Page title="Edit your account" mainWidth="form">
+        <Page
+            title="Edit your account"
+            mainWidth="form"
+            isLoading={loading || isLoading}
+        >
             <Text tag="h1">Edit your account</Text>
 
             <Form

@@ -2,7 +2,7 @@
 
 import { gql } from "@apollo/client"
 
-const ALL_USERS = gql`
+export const ALL_USERS = gql`
     query {
         users {
             _id
@@ -11,5 +11,3 @@ const ALL_USERS = gql`
         }
     }
 `
-
-export { ALL_USERS }

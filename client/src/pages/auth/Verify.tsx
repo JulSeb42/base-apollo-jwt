@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
-import { Text, PageLoading } from "tsx-library-julseb"
+import { Text } from "tsx-library-julseb"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
@@ -12,11 +12,12 @@ import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
 import { VERIFY_USER } from "../../graphql/mutations"
-import { EditPagesTypes } from "../../types"
 
-const Verify = ({ edited, setEdited }: EditPagesTypes) => {
+const Verify = () => {
     const { id, token } = useParams()
-    const { isLoggedIn, user, setUser, setToken, loginUser } = useContext(AuthContext) as AuthContextType
+    const { isLoggedIn, user, setUser, setToken, loginUser } = useContext(
+        AuthContext
+    ) as AuthContextType
 
     const [isLoading, setIsLoading] = useState(true)
     const [isVerified, setIsVerified] = useState(user?.verified)
@@ -24,33 +25,28 @@ const Verify = ({ edited, setEdited }: EditPagesTypes) => {
         undefined | GraphQLErrors
     >(undefined)
 
-    const [verifyUser] = useMutation(VERIFY_USER)
+    const [verifyUser, { loading }] = useMutation(VERIFY_USER)
 
     const verifyFunc = () => {
-        if (
-            isLoggedIn &&
-            user &&
-            user._id === id &&
-            user.verifyToken === token
-        ) {
+        if (isLoggedIn && user?._id === id && user?.verifyToken === token) {
             const request = {
                 _id: id,
                 verifyToken: token,
             }
+
             verifyUser({
                 variables: {
                     verifyInput: request,
                 },
+
                 onError: ({ graphQLErrors }) => {
                     setErrorMessages(graphQLErrors)
                 },
             }).then(res => {
                 const user = res.data.verifyUser
-                
                 setToken(user.token)
                 setUser(user)
                 loginUser(user)
-                setEdited(!edited)
                 setIsVerified(true)
             })
         }
@@ -62,10 +58,8 @@ const Verify = ({ edited, setEdited }: EditPagesTypes) => {
         verifyFunc()
     }, 1000)
 
-    return isLoading ? (
-        <PageLoading />
-    ) : (
-        <Page title="Verify your account">
+    return (
+        <Page title="Verify your account" isLoading={isLoading || loading}>
             {isLoggedIn && isVerified ? (
                 <>
                     <Text tag="h1">Your account is verifed!</Text>
@@ -78,6 +72,7 @@ const Verify = ({ edited, setEdited }: EditPagesTypes) => {
             ) : isLoggedIn && !isVerified ? (
                 <>
                     <Text tag="h1">Verification failed</Text>
+
                     <Text>
                         Your account could not be verified, please try again
                         later.

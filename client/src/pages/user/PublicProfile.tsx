@@ -3,10 +3,9 @@
 import React from "react"
 import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
-import { PageLoading, Text } from "tsx-library-julseb"
+import { Text } from "tsx-library-julseb"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 
 import { GET_USER } from "../../graphql/queries"
 
@@ -21,18 +20,12 @@ const PublicProfile = () => {
         },
     })
 
-    const user: UserType = data?.getUser
+    const user: UserType = data?.user
 
-    if (loading) return <PageLoading />
-
-    if (error) return <ErrorPage error={error.message} />
-
-    return user ? (
-        <Page title={user.fullName}>
-            <Text tag="h1">{user.fullName}</Text>
+    return (
+        <Page title={user?.fullName} isLoading={loading} error={error?.message}>
+            <Text tag="h1">{user?.fullName}</Text>
         </Page>
-    ) : (
-        <div />
     )
 }
 

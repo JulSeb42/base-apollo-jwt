@@ -2,7 +2,7 @@
 
 import { gql } from "@apollo/client"
 
-const EDIT_PASSWORD = gql`
+export const EDIT_PASSWORD = gql`
     mutation ($editPasswordInput: EditPasswordInput) {
         editPassword(editPasswordInput: $editPasswordInput) {
             _id
@@ -13,5 +13,3 @@ const EDIT_PASSWORD = gql`
         }
     }
 `
-
-export { EDIT_PASSWORD }

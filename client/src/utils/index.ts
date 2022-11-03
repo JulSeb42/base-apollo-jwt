@@ -2,7 +2,7 @@
 
 import { Utils } from "tsx-library-julseb"
 
-const {
+export const {
     calculateAverage,
     calculateTotalSum,
     capitalize,
@@ -33,35 +33,3 @@ const {
     unslugify,
     uuid,
 } = Utils
-
-export {
-    calculateAverage,
-    calculateTotalSum,
-    capitalize,
-    convertDate,
-    convertDateShort,
-    convertPrice,
-    convertToEmail,
-    convertToPascal,
-    convertYoutube,
-    detectLanguage,
-    formatHour,
-    generateNumbers,
-    getFirstName,
-    getLastName,
-    getPercentage,
-    getRandom,
-    getRandomAvatar,
-    getRandomDate,
-    getRandomNumber,
-    getRandomString,
-    getRandomTime,
-    getTimeNow,
-    getToday,
-    passwordRegex,
-    emailRegex,
-    scrollToTop,
-    slugify,
-    unslugify,
-    uuid,
-}

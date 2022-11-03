@@ -1,14 +1,15 @@
 /*=============================================== User type ===============================================*/
 
 type UserType = {
+    _id: string
     fullName: string
     email: string
     password: string
-    exp: number | string
     token: string
-    _id: string
+    exp: number | string
     verified: boolean
     verifyToken: string
+    resetToken: string
 }
 
 export type { UserType }

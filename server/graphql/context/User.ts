@@ -21,15 +21,13 @@ export const UserContext = {
             )
         }
 
-        const user = await User.findByIdAndUpdate(
+        return await User.findByIdAndUpdate(
             _id,
             { fullName },
             {
                 new: true,
             }
         )
-
-        return user
     },
 
     editPassword: async ({

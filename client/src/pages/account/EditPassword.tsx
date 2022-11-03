@@ -12,9 +12,8 @@ import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
 import { EDIT_PASSWORD } from "../../graphql/mutations"
-import { EditPagesTypes } from "../../types"
 
-const EditPassword = ({ edited, setEdited }: EditPagesTypes) => {
+const EditPassword = () => {
     const navigate = useNavigate()
 
     const { user, setToken, setUser } = useContext(
@@ -55,7 +54,6 @@ const EditPassword = ({ edited, setEdited }: EditPagesTypes) => {
             const user = res.data.editPassword
             setToken(user.token)
             setUser(user)
-            setEdited(!edited)
             navigate("/my-account")
         })
     }
