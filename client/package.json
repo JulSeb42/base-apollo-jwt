@@ -11,7 +11,7 @@
         "graphql": "^16.6.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^6.4.2",
+        "react-router-dom": "^6.4.3",
         "react-scripts": "^5.0.1",
         "styled-components": "^5.3.6",
         "tsx-library-julseb": "^5.2.2",
@@ -43,9 +43,9 @@
         ]
     },
     "devDependencies": {
-        "@types/jest": "^29.2.1",
+        "@types/jest": "^29.2.2",
         "@types/node": "^18.11.9",
-        "@types/react": "^18.0.24",
+        "@types/react": "^18.0.25",
         "@types/react-dom": "^18.0.8",
         "@types/react-router-dom": "^5.3.3",
         "@types/styled-components": "^5.1.26"
