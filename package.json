@@ -12,7 +12,7 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.7.2",
         "nodemailer": "^6.8.0",
-        "ts-utils-julseb": "^2.2.3"
+        "ts-utils-julseb": "^2.2.5"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
