@@ -1,8 +1,8 @@
-/*=============================================== Type query ===============================================*/
+/*=============================================== User query ===============================================*/
 
 import { gql } from "apollo-server"
 
-export const Query = gql`
+export const QueryUser = gql`
     type Query {
         users: [User]
         user(_id: ID!): User
