@@ -11,21 +11,30 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 import DangerZone from "../../components/DangerZone"
+import ImageUploader from "../../components/ImageUploader"
 
 import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
 
 const EditAccount = () => {
     const navigate = useNavigate()
-    const { user, setUser, setToken, logoutUser, isLoading } = useContext(
-        AuthContext
-    ) as AuthContextType
+    const {
+        user,
+        setUser,
+        setToken,
+        logoutUser,
+        isLoading: isApiLoading,
+    } = useContext(AuthContext) as AuthContextType
 
     const [editUser, { loading }] = useMutation(EDIT_USER)
 
     const [inputs, setInputs] = useState({
-        fullName: !isLoading ? user?.fullName : "",
-        _id: !isLoading ? user?._id : "",
+        fullName: !isApiLoading ? user?.fullName : "",
+        _id: !isApiLoading ? user?._id : "",
     })
+    const [avatar, setAvatar] = useState(
+        !isApiLoading ? user?.avatar : user ? user?.avatar : ""
+    )
+    const [isLoading, setIsLoading] = useState(false)
     const [errorMessages, setErrorMessages] = useState<
         GraphQLErrors | undefined
     >(undefined)
@@ -39,12 +48,17 @@ const EditAccount = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        const request = {
+            ...inputs,
+            _id: user?._id,
+            avatar,
+        }
+
         if (user) {
             editUser({
                 variables: {
                     editUserInput: {
-                        ...inputs,
-                        _id: user._id,
+                        ...request,
                     },
                 },
 
@@ -85,7 +99,7 @@ const EditAccount = () => {
         <Page
             title="Edit your account"
             mainWidth="form"
-            isLoading={loading || isLoading}
+            isLoading={loading || isApiLoading}
         >
             <Text tag="h1">Edit your account</Text>
 
@@ -93,7 +107,7 @@ const EditAccount = () => {
                 buttonPrimary="Edit your account"
                 buttonSecondary={{ text: "Cancel", to: "/my-account" }}
                 onSubmit={handleSubmit}
-                isLoading={loading || isLoading || !user?._id}
+                isLoading={loading || isApiLoading || isLoading || !user?._id}
             >
                 <Input
                     id="fullName"
@@ -112,6 +126,13 @@ const EditAccount = () => {
                         style: "italic",
                         color: "gray",
                     }}
+                />
+
+                <ImageUploader
+                    id="avatar"
+                    imageUrl={avatar || ""}
+                    setImageUrl={setAvatar}
+                    setIsLoading={setIsLoading}
                 />
             </Form>
 

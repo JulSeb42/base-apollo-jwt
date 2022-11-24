@@ -2,7 +2,7 @@
 
 import { ApolloError } from "apollo-server"
 import bcrypt from "bcryptjs"
-import { getRandomString, emailRegex, passwordRegex } from "ts-utils-julseb"
+import { getRandomString, emailRegex, passwordRegex, getRandomAvatar } from "ts-utils-julseb"
 import jwt from "jsonwebtoken"
 
 import sendMail from "../../utils/send-mail"
@@ -42,6 +42,7 @@ export const AuthContext = {
                 password: hashedPassword,
                 verified: false,
                 verifyToken,
+                avatar: getRandomAvatar("other"),
             })
 
             const token = jwt.sign(

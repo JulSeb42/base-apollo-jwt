@@ -6,5 +6,6 @@ export const EditUserInput = gql`
     input EditUserInput {
         _id: ID!
         fullName: String
+        avatar: String
     }
 `

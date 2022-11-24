@@ -10,6 +10,7 @@ export const EDIT_USER = gql`
             email
             password
             token
+            avatar
         }
     }
 `

@@ -21,6 +21,7 @@ const userSchema = new Schema(
         verified: Boolean,
         verifyToken: String,
         resetToken: String,
+        avatar: String,
     },
     { timestamps: true }
 )

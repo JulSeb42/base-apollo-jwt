@@ -6,6 +6,8 @@ import typeDefs from "./graphql/type-definitions"
 import resolvers from "./graphql/resolvers"
 import context from "./graphql/context"
 
+import "./routes/uploader"
+
 import "./db"
 
 import { PORT } from "./utils/consts"
