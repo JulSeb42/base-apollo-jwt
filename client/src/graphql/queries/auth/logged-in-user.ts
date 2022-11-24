@@ -12,6 +12,7 @@ export const LOGGED_IN_USER = gql`
             verified
             verifyToken
             token
+            avatar
         }
     }
 `

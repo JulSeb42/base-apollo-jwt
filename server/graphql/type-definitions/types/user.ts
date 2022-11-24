@@ -12,5 +12,6 @@ export const User = gql`
         verifyToken: String
         resetToken: String
         token: String
+        avatar: String
     }
 `

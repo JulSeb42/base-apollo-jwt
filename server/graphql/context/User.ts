@@ -11,9 +11,9 @@ import { SALT_ROUNDS } from "../../utils/consts"
 
 export const UserContext = {
     users: async () => await User.find(),
-    user: async ({ _id }: any) => await User.findById(_id),
+    user: async ({ _id }: UserType) => await User.findById(_id),
 
-    editUser: async ({ _id, fullName }: UserType) => {
+    editUser: async ({ _id, fullName, avatar }: UserType) => {
         if (!fullName) {
             throw new ApolloError(
                 "Your full name is required",
@@ -23,7 +23,7 @@ export const UserContext = {
 
         return await User.findByIdAndUpdate(
             _id,
-            { fullName },
+            { fullName, avatar },
             {
                 new: true,
             }

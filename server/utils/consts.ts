@@ -7,6 +7,8 @@ export const MONGODB_URI =
 
 export const PORT = process.env.PORT || 5005
 
+export const API_PORT = process.env.API_PORT || 4000
+
 export const TOKEN_SECRET = process.env.TOKEN_SECRET || ""
 
 export const SALT_ROUNDS = 10

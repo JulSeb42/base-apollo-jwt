@@ -10,6 +10,7 @@ type UserType = {
     verified: boolean
     verifyToken: string
     resetToken: string
+    avatar: string
 }
 
 export type { UserType }

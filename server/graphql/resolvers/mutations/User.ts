@@ -1,11 +1,8 @@
 /*=============================================== User mutations ===============================================*/
 
 export const UserMutation = {
-    editUser: async (
-        _: any,
-        { editUserInput: { _id, fullName } }: any,
-        { editUser }: any
-    ) => await editUser({ _id, fullName }),
+    editUser: async (_: any, { editUserInput }: any, { editUser }: any) =>
+        await editUser(editUserInput),
 
     editPassword: async (
         _: any,
