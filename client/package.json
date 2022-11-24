@@ -15,8 +15,8 @@
         "react-scripts": "^5.0.1",
         "styled-components": "^5.3.6",
         "tsx-library-julseb": "^5.2.3",
-        "typescript": "^4.8.4",
-        "web-vitals": "^3.0.4"
+        "typescript": "^4.9.3",
+        "web-vitals": "^3.1.0"
     },
     "scripts": {
         "start": "GENERATE_SOURCEMAP=false react-scripts start",
@@ -43,10 +43,10 @@
         ]
     },
     "devDependencies": {
-        "@types/jest": "^29.2.2",
+        "@types/jest": "^29.2.3",
         "@types/node": "^18.11.9",
         "@types/react": "^18.0.25",
-        "@types/react-dom": "^18.0.8",
+        "@types/react-dom": "^18.0.9",
         "@types/react-router-dom": "^5.3.3",
         "@types/styled-components": "^5.1.26"
     }

@@ -12,8 +12,6 @@ import { User } from "./types/user"
 import { QueryUser } from "./types/query/user"
 import { MutationAuth } from "./types/mutation/auth"
 import { MutationUser } from "./types/mutation/user"
-// import { Query } from "./types/query"
-// import { Mutation } from "./types/mutation"
 
 const typeDefs: any = [
     SignupInput,
@@ -27,8 +25,6 @@ const typeDefs: any = [
     QueryUser,
     MutationAuth,
     MutationUser,
-    // Query,
-    // Mutation,
 ]
 
 export default typeDefs
