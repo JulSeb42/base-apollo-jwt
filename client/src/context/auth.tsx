@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client"
 
 import { UserType } from "../types"
 
-import { LOGGED_IN_USER } from "../graphql/queries"
+import { LOGGED_IN_USER } from "./graphql"
 
 export type AuthContextType = {
     isLoggedIn?: boolean

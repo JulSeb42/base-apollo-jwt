@@ -8,7 +8,7 @@ import { uuid } from "../../utils"
 
 import Page from "../../components/layouts/Page"
 
-import { ALL_USERS } from "../../graphql/queries"
+import { ALL_USERS } from "./graphql"
 
 import { UserType } from "../../types"
 

@@ -10,7 +10,7 @@ import { passwordRegex } from "../../utils"
 import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
-import { RESET_PASSWORD } from "../../graphql/mutations"
+import { RESET_PASSWORD } from "./graphql"
 
 const ResetPassword = () => {
     const navigate = useNavigate()

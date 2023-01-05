@@ -7,7 +7,7 @@ import { ThemeProviderWrapper } from "tsx-library-julseb"
 import { ApolloProvider } from "@apollo/client"
 
 import { AuthProviderWrapper } from "./context/auth"
-import client from "./graphql/apollo-client"
+import client from "./apollo-client"
 
 import App from "./App"
 

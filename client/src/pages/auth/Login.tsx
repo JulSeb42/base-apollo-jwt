@@ -11,7 +11,7 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
-import { LOGIN } from "../../graphql/mutations"
+import { LOGIN } from "./graphql"
 
 const Login = () => {
     const navigate = useNavigate()

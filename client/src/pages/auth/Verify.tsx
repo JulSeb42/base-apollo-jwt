@@ -11,7 +11,7 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
-import { VERIFY_USER } from "../../graphql/mutations"
+import { VERIFY_USER } from "./graphql"
 
 const Verify = () => {
     const { id, token } = useParams()

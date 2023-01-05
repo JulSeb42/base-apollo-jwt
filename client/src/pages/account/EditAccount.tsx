@@ -13,7 +13,7 @@ import ErrorMessages from "../../components/ErrorMessages"
 import DangerZone from "../../components/DangerZone"
 import ImageUploader from "../../components/ImageUploader"
 
-import { EDIT_USER, DELETE_USER } from "../../graphql/mutations"
+import { EDIT_USER, DELETE_USER } from "./graphql"
 
 const EditAccount = () => {
     const navigate = useNavigate()

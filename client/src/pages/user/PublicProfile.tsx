@@ -7,7 +7,7 @@ import { Text } from "tsx-library-julseb"
 
 import Page from "../../components/layouts/Page"
 
-import { GET_USER } from "../../graphql/queries"
+import { GET_USER } from "./graphql"
 
 import { UserType } from "../../types"
 

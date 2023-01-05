@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import Page from "../../components/layouts/Page"
 import ErrorMessages from "../../components/ErrorMessages"
 
-import { FORGOT_PASSWORD } from "../../graphql/mutations"
+import { FORGOT_PASSWORD } from "./graphql"
 
 const ForgotPassword = () => {
     const navigate = useNavigate()
